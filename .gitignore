@@ -155,6 +155,7 @@ $RECYCLE.BIN/
 
 # Visual Studio stuff
 .vs/
+.vscode/
 .idea/
 .gradle/
 
