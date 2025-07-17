@@ -6,6 +6,12 @@ public class EnemyHealth : MonoBehaviour
     public float initialHealth;
     public float maxHealth;
     public float damageCooldown;
+    
+    [Header("Loot")]
+    public int xpAmount;
+    public GameObject collectiblePrefab;
+    public GameObject containerPrefab;
+    public GameObject swordPrefab;
 
     [HideInInspector]
     public float currentHealth;
@@ -35,6 +41,7 @@ public class EnemyHealth : MonoBehaviour
             this.healthBar.UpdateHealthBar(this.currentHealth);
             if (this.currentHealth <= 0)
             {
+                DropLoot();
                 Destroy(this.gameObject);
             }
         }
@@ -62,6 +69,27 @@ public class EnemyHealth : MonoBehaviour
     public bool IsAlive()
     {
         return this.currentHealth > 0;
+    }
+    
+    public void DropLoot()
+    {
+        XPContainer container = this.containerPrefab.GetComponent<XPContainer>();
+        container.XPAmount = this.xpAmount;
+
+        GameObject instance = Instantiate(collectiblePrefab, this.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+        Collectible collectible = instance.GetComponent<Collectible>();
+        collectible.SetContent(containerPrefab);
+
+        SwordContainer swordContainer = this.swordPrefab.GetComponent<SwordContainer>();
+        WeaponQualityGenerator generator = new WeaponQualityGenerator();
+        generator.Start();
+        swordContainer.properties = generator.GenerateWeapon(Accessor.xPHandler.currentXP);
+
+        GameObject swordInstance = Instantiate(collectiblePrefab, this.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+        Collectible swordCollectible = swordInstance.GetComponent<Collectible>();
+        swordCollectible.SetContent(swordPrefab);
+
+        Accessor.enemySpawner.DecreaseCurrentAmount();
     }
 
 

@@ -44,7 +44,7 @@ namespace BehaviorTree
             this.navMeshAgent.isStopped = true;
             this.isAttacking = true;
             this.animator.SetTrigger("attack");
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             this.isAttacking = false;
         }
     }

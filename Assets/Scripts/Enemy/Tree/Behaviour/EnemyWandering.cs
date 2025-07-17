@@ -7,7 +7,7 @@ namespace BehaviorTree
     public class EnemyWandering : MonoBehaviour
     {
         public float wanderRadius = 15f;
-        public float navMeshSampleDistance = 5f;
+        public float navMeshSampleDistance = 10f;
         public float waitTimeAtPoint = 2f;
         public float lookAroundTime = 2f;
         public float rotateSpeed = 90f;
@@ -74,9 +74,6 @@ namespace BehaviorTree
             this.isLookingAround = false;
             this.isMovingToDestination = false;
             
-            this.agent.isStopped = true;
-            this.agent.ResetPath();
-            
             this.animator.SetBool("isWandering", false);
         }
         
@@ -89,13 +86,15 @@ namespace BehaviorTree
                 float waitTime = 0f;
                 const float maxWaitTime = 10f;
             
-                while (!HasReachedDestination && waitTime < maxWaitTime && isWandering && isMovingToDestination)
+                while (!HasReachedDestination && waitTime < maxWaitTime)
                 {
                     waitTime += Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
                 }
 
+                Debug.Log("Stopping");
+                
                 agent.ResetPath();
-                agent.velocity = Vector3.zero;
                 agent.isStopped = true;
                 
                 isMovingToDestination = false;
@@ -106,6 +105,8 @@ namespace BehaviorTree
                 Debug.Log("Waiting");
                 yield return new WaitForSeconds(waitTimeAtPoint);
             
+                
+                agent.isStopped = false;
                 Debug.Log("Continue Wandering");
             }
         }
@@ -130,7 +131,7 @@ namespace BehaviorTree
                         agent.SetDestination(hit.position);
                         isMovingToDestination = true;
                         animator.SetBool("isWandering", true);
-                        Debug.Log(target);
+                        Debug.Log(hit.position);
                         return;
                     }
                 }

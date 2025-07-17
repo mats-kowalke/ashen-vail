@@ -38,7 +38,6 @@ namespace BehaviorTree
         public void StopChase()
         {
             isChasing = false;
-            agent.isStopped = true;
         }
     }
 }

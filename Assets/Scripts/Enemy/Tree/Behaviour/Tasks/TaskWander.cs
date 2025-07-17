@@ -35,11 +35,7 @@ namespace BehaviorTree
             
             enemyChase.StopChase();
 
-            navMeshAgent.isStopped = false;
-
             wandering.StartWander();
-            
-            animator.SetBool("isWandering", true);
 
             return State.RUNNING;
             
