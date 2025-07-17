@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class TimerController : MonoBehaviour
@@ -42,5 +43,15 @@ public class TimerController : MonoBehaviour
         int minutes = seconds / 60;
         if (minutes == 0) return seconds.ToString();
         else return minutes.ToString() + ":" + (seconds - minutes * 60).ToString();
+    }
+
+    public void EndGame(InputAction.CallbackContext context)
+    {
+        Debug.Log("Escaping game");
+        if (context.performed)
+        {
+            LevelKeeper.levelScore = this.xPHandler.currentXP;
+            SceneManager.LoadScene(0);
+        }
     }
 }
