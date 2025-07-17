@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     public float maxHealth;
     public float damageCooldown;
 
-    private float currentHealth;
+    public float currentHealth;
     private float timeAtLastDamage;
     private Vector3 respawnPosition;
 

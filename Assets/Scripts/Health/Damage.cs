@@ -12,7 +12,7 @@ public class Damage : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemySword"))
+        if (other.CompareTag("EnemySword") && this.health.currentHealth > 0)
         {
             this.health.TakeDamage(10);
         }

@@ -14,7 +14,6 @@ public class BlockingHandler : MonoBehaviour
     private WalkHandler walkHandler;
     private JumpHandler jumpHandler;
     private CombatHandler combatHandler;
-    private Health health;
 
     public void Start()
     {
@@ -25,7 +24,6 @@ public class BlockingHandler : MonoBehaviour
         this.walkHandler = this.GetComponent<WalkHandler>();
         this.jumpHandler = this.GetComponent<JumpHandler>();
         this.combatHandler = this.GetComponent<CombatHandler>();
-        this.health = this.GetComponent<Health>();
 
         Accessor.blockingHandler = this;
     }
@@ -54,7 +52,6 @@ public class BlockingHandler : MonoBehaviour
         if (this.walkHandler != null) this.walkHandler.DisableWalking();
         if (this.jumpHandler != null) this.jumpHandler.DisableJumping();
         if (this.combatHandler != null) this.combatHandler.DisableAttacking();
-        if (this.health != null) this.health.DisableDamage();
     }
 
     private void EnableOther()
@@ -62,7 +59,6 @@ public class BlockingHandler : MonoBehaviour
         if (this.walkHandler != null) this.walkHandler.EnableWalking();
         if (this.jumpHandler != null) this.jumpHandler.EnableJumping();
         if (this.combatHandler != null) this.combatHandler.EnableAttacking();
-        if (this.health != null) this.health.EnableDamage();
     }
 
     public void EnableBlocking()

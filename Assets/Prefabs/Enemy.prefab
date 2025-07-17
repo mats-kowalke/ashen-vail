@@ -207,7 +207,7 @@ MonoBehaviour:
   initialHealth: 100
   maxHealth: 100
   damageCooldown: 1
-  xpAmount: 0
+  xpAmount: 5
   collectiblePrefab: {fileID: 2219053323237809672, guid: 0b0b3d85d55d9f648972baf6a363de2a, type: 3}
   containerPrefab: {fileID: 3152564457639314613, guid: d6b794681a2973e4282a3c610934daa7, type: 3}
   swordPrefab: {fileID: 3078014798531590800, guid: 117c5e5a1d06f1845a67e59da297b8e0, type: 3}
